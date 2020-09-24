@@ -36,8 +36,6 @@ public class MainViewModel extends AndroidViewModel {
         String temp = inputEditLiveData.getValue();
         inputEditLiveData.setValue(outputEditLiveData.getValue());
         outputEditLiveData.setValue(temp);
-        System.out.println(spinnerInputLiveData.getValue());
-        System.out.println(spinnerOutputLiveData.getValue());
         temp = spinnerInputLiveData.getValue();
         spinnerInputLiveData.setValue(spinnerOutputLiveData.getValue());
         spinnerOutputLiveData.setValue(temp);
@@ -81,8 +79,8 @@ public class MainViewModel extends AndroidViewModel {
 
     public void convert()
     {
-        double inputCoefficient;
-        double outputCoefficient;
+        double inputCoefficient = 1.0;
+        double outputCoefficient = 1.0;
 
         switch (Objects.requireNonNull(spinnerInputLiveData.getValue())) {
             case "Meters":
