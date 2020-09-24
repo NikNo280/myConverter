@@ -69,26 +69,11 @@ public class DisplayFragment extends Fragment {
                 editOutput.setText(newInput);
             }
         };
-        final Observer<String> outputSpinnerObserver = new Observer<String>(){
-            @Override
-            public void onChanged(String newInput) {
-                ArrayAdapter adapter = (ArrayAdapter) spinnerOutput.getAdapter();
-                spinnerOutput.setSelection(adapter.getPosition(mainViewModel.getInputSpinnerData().getValue()));
-            }
-        };
 
-        final Observer<String> inputSpinnerObserver = new Observer<String>(){
-            @Override
-            public void onChanged(String newInput) {
-                ArrayAdapter adapter = (ArrayAdapter) spinnerInput.getAdapter();
-                spinnerInput.setSelection(adapter.getPosition(mainViewModel.getOutputSpinnerData().getValue()));
-            }
-        };
 
         mainViewModel.getInputEditData().observe(getViewLifecycleOwner(), inputEditObserver);
         mainViewModel.getOutputEditData().observe(getViewLifecycleOwner(), outputEditObserver);
-        mainViewModel.getOutputEditData().observe(getViewLifecycleOwner(), inputSpinnerObserver);
-        mainViewModel.getOutputEditData().observe(getViewLifecycleOwner(), outputSpinnerObserver);
+
 
         clipboard = (ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         layout.findViewById(R.id.exchange_button).setOnClickListener(item -> mainViewModel.exchangeLiveData());
