@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply from: '../git.gradle'
+def versionArray = getArray()
 
 android {
     compileSdkVersion 30
@@ -9,7 +11,7 @@ android {
         applicationId "com.example.myconverter"
         minSdkVersion 27
         targetSdkVersion 30
-        versionCode 1
+        versionCode generateVersionCode(versionArray)
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

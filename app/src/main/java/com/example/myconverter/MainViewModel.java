@@ -135,7 +135,15 @@ public class MainViewModel extends AndroidViewModel {
                 outputCoefficient = 1.00;
                 break;
         }
-        outputEditLiveData.setValue(String.valueOf(String.format("%.2f", (inputCoefficient / outputCoefficient) * Double.parseDouble(Objects.requireNonNull(inputEditLiveData.getValue())))).replace(",", "."));
+        if(Objects.requireNonNull(inputEditLiveData.getValue()).length() > 0)
+        {
+            outputEditLiveData.setValue(String.valueOf(String.format("%.2f", (inputCoefficient / outputCoefficient) * Double.parseDouble(Objects.requireNonNull(inputEditLiveData.getValue())))).replace(",", "."));
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplication(), "Empty set", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     public void saveInBuffer(int field, ClipboardManager clipboardManager) {
@@ -151,5 +159,6 @@ public class MainViewModel extends AndroidViewModel {
         }
         Toast toast = Toast.makeText(getApplication(), "Save", Toast.LENGTH_SHORT);
         toast.show();
+
     }
 }

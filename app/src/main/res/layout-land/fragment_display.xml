@@ -48,11 +48,11 @@
         android:id="@+id/convert_button"
         android:layout_width="89dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="28dp"
         android:text="@string/convert_button"
         app:layout_constraintBottom_toTopOf="@+id/output_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
@@ -72,40 +72,6 @@
         android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/save_input_button"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginBottom="92dp"
-        android:text="@string/Save"
-        app:layout_constraintBottom_toTopOf="@+id/save_output_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toEndOf="@+id/input_edit" />
-
-    <Button
-        android:id="@+id/save_output_button"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginBottom="28dp"
-        android:text="@string/Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toEndOf="@+id/output_edit" />
-
-    <Button
-        android:id="@+id/exchange_button"
-        android:layout_width="90dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/exchange_button"
-        app:layout_constraintBottom_toTopOf="@+id/output_edit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/convert_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,6 @@ import android.widget.Spinner;
 
 import java.util.Objects;
 
-
 public class DisplayFragment extends Fragment {
 
     MainViewModel mainViewModel;
@@ -38,6 +37,7 @@ public class DisplayFragment extends Fragment {
         EditText editOutput = layout.findViewById(R.id.output_edit);
         Spinner spinnerInput = layout.findViewById(R.id.input_spinner);
         Spinner spinnerOutput = layout.findViewById(R.id.output_spinner);
+
         spinnerInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
                                        View itemSelected, int selectedItemPosition, long selectedId) {
@@ -57,29 +57,13 @@ public class DisplayFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        final Observer<String> inputEditObserver = new Observer<String>(){
-            @Override
-            public void onChanged(String newInput) {
-                editInput.setText(newInput);
-            }
-        };
-        final Observer<String> outputEditObserver = new Observer<String>(){
-            @Override
-            public void onChanged(String newInput) {
-                editOutput.setText(newInput);
-            }
-        };
 
 
-        mainViewModel.getInputEditData().observe(getViewLifecycleOwner(), inputEditObserver);
-        mainViewModel.getOutputEditData().observe(getViewLifecycleOwner(), outputEditObserver);
-
+        mainViewModel.getInputEditData().observe(requireActivity(), value -> editInput.setText(value));
+        mainViewModel.getOutputEditData().observe(requireActivity(), value -> editOutput.setText(value));
 
         clipboard = (ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        layout.findViewById(R.id.exchange_button).setOnClickListener(item -> mainViewModel.exchangeLiveData());
         layout.findViewById(R.id.convert_button).setOnClickListener(item -> mainViewModel.convert());
-        layout.findViewById(R.id.save_input_button).setOnClickListener(item -> mainViewModel.saveInBuffer(1, clipboard));
-        layout.findViewById(R.id.save_output_button).setOnClickListener(item -> mainViewModel.saveInBuffer(2, clipboard));
         return layout;
     }
 }
