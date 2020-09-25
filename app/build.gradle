@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    flavorDimensions "default"
 
     defaultConfig {
         applicationId "com.example.myconverter"
@@ -20,9 +21,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors{
+
+        freeFlavors{
+
+        }
+
+        paidFlavour{
+
+        }
     }
 }
 
