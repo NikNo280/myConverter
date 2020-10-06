@@ -25,7 +25,7 @@ def getArray() {
 }
 
 static def generateVersionCode(ArrayList array) {
-    def result = (array[0].toInteger()*10000 + array[1].toInteger())*100 + array[2].toInteger()
+    def result = array[0].toInteger() * 10000 + array[1].toInteger() * 100 + array[2].toInteger()
     return result
 }
 

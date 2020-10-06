@@ -3,10 +3,12 @@ package com.example.myconverter;
 import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.Objects;
@@ -36,9 +38,6 @@ public class MainViewModel extends AndroidViewModel {
         String temp = inputEditLiveData.getValue();
         inputEditLiveData.setValue(outputEditLiveData.getValue());
         outputEditLiveData.setValue(temp);
-        temp = spinnerInputLiveData.getValue();
-        spinnerInputLiveData.setValue(spinnerOutputLiveData.getValue());
-        spinnerOutputLiveData.setValue(temp);
     }
 
     public void addValue(String str)
@@ -57,87 +56,22 @@ public class MainViewModel extends AndroidViewModel {
     public void clearData(){
         inputEditLiveData.setValue("");
     }
-    public MutableLiveData<String> getInputEditData()
+    public LiveData<String> getInputEditData()
     {
         return inputEditLiveData;
     }
 
-    public MutableLiveData<String> getOutputEditData()
+    public LiveData<String> getOutputEditData()
     {
         return outputEditLiveData;
     }
 
-    public MutableLiveData<String> getInputSpinnerData()
-    {
-        return spinnerInputLiveData;
-    }
-
-    public MutableLiveData<String> getOutputSpinnerData()
-    {
-        return spinnerOutputLiveData;
-    }
-
     public void convert()
     {
-        double inputCoefficient = 1.0;
-        double outputCoefficient = 1.0;
-
-        switch (Objects.requireNonNull(spinnerInputLiveData.getValue())) {
-            case "Meters":
-            case "Grams":
-            case "Rubles" :
-                inputCoefficient = 1.0;
-                break;
-            case "Kilometers":
-            case "Kilograms" :
-                inputCoefficient = 1000.0;
-                break;
-            case "Miles" :
-                inputCoefficient = 1609.64;
-                break;
-            case "Pounds" :
-                inputCoefficient = 453.592;
-                break;
-            case "Dollars" :
-                inputCoefficient = 2.62;
-                break;
-            case "Euro" :
-                inputCoefficient = 3.09;
-                break;
-            default:
-                inputCoefficient = 1.00;
-                break;
-        }
-
-        switch (Objects.requireNonNull(spinnerOutputLiveData.getValue())) {
-            case "Meters":
-            case "Grams":
-            case "Rubles" :
-                outputCoefficient = 1.0;
-                break;
-            case "Kilometers":
-            case "Kilograms" :
-                outputCoefficient = 1000.0;
-                break;
-            case "Miles" :
-                outputCoefficient = 1609.64;
-                break;
-            case "Pounds" :
-                outputCoefficient = 453.592;
-                break;
-            case "Dollars" :
-                outputCoefficient = 2.62;
-                break;
-            case "Euro" :
-                outputCoefficient = 3.09;
-                break;
-            default:
-                outputCoefficient = 1.00;
-                break;
-        }
-        if(Objects.requireNonNull(inputEditLiveData.getValue()).length() > 0)
+        String result = Converter.convert(spinnerInputLiveData.getValue(), spinnerOutputLiveData.getValue(), inputEditLiveData.getValue());
+        if(Objects.requireNonNull(result) != "ERROR")
         {
-            outputEditLiveData.setValue(String.valueOf(String.format("%.2f", (inputCoefficient / outputCoefficient) * Double.parseDouble(Objects.requireNonNull(inputEditLiveData.getValue())))).replace(",", "."));
+            outputEditLiveData.setValue(result);
         }
         else
         {

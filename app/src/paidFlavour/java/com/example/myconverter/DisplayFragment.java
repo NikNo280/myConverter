@@ -58,10 +58,8 @@ public class DisplayFragment extends Fragment {
             }
         });
 
-
         mainViewModel.getInputEditData().observe(requireActivity(), value -> editInput.setText(value));
         mainViewModel.getOutputEditData().observe(requireActivity(), value -> editOutput.setText(value));
-
         clipboard = (ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         layout.findViewById(R.id.exchange_button).setOnClickListener(item -> mainViewModel.exchangeLiveData());
         layout.findViewById(R.id.convert_button).setOnClickListener(item -> mainViewModel.convert());
